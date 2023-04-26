@@ -12,21 +12,15 @@ import java.util.Optional;
 @Repository
 public class MemoryCandidateRepository implements CandidateRepository {
 
-    private static final MemoryCandidateRepository INSTANCE = new MemoryCandidateRepository();
-
     private int nextId = 1;
 
     private final Map<Integer, Candidate> candidates = new HashMap<>();
 
-    private MemoryCandidateRepository() {
+    public MemoryCandidateRepository() {
         LocalDateTime dateTime = LocalDateTime.of(2023, 3, 21, 12, 0);
         save(new Candidate(0, "Vasia Pupkin", "test", dateTime));
         save(new Candidate(0, "Lyolik Lipkin", "test", dateTime));
         save(new Candidate(0, "Bolik Dubkin", "test", dateTime));
-    }
-
-    public static MemoryCandidateRepository getInstance() {
-        return INSTANCE;
     }
 
     @Override
