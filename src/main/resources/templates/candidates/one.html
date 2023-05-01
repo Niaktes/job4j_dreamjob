@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
 
     <!--  Зависимости Bootstrap-->
@@ -37,6 +37,12 @@
             <div class="mb-3">
                 <label for="description" class="form-label"><b>Описание кандидата</b></label>
                 <textarea class="form-control" id="description" name="description" th:field="*{description}" rows="25" placeholder="Опишите личные качества и навыки"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="city"><b>Город проживания</b></label>
+                <select class="form-control" id="city" name="cityId">
+                    <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}" th:field="*{cityId}" th:selected="${city.id==cityId}"></option>
+                </select>
             </div>
             <div class="mb-3 row">
                 <div class="col-6"></div>
