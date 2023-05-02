@@ -12,13 +12,13 @@ import java.util.Map;
 @Repository
 public class MemoryCityRepository implements CityRepository {
 
-    private final Map<Integer, City> cities = new HashMap<>() {
-        {
-            put(1, new City(1, "Москва"));
-            put(2, new City(2, "Санкт-Петербург"));
-            put(3, new City(3, "Екатеринбург"));
-        }
-    };
+    private final Map<Integer, City> cities = new HashMap<>();
+
+    public MemoryCityRepository() {
+        cities.put(1, new City(1, "Москва"));
+        cities.put(2, new City(2, "Санкт-Петербург"));
+        cities.put(3, new City(3, "Екатеринбург"));
+    }
 
     @Override
     public Collection<City> findAll() {
