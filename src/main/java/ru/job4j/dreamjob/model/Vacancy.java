@@ -1,6 +1,7 @@
 package ru.job4j.dreamjob.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Vacancy {
 
@@ -86,13 +87,7 @@ public class Vacancy {
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + title.hashCode();
-        result = 31 * result + description.hashCode();
-        result = 31 * result + creationDate.hashCode();
-        result = 31 * result + (visible ? 1 : 0);
-        result = 31 * result + cityId;
-        return result;
+        return Objects.hash(id);
     }
 
 }
