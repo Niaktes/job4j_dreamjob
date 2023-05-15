@@ -22,9 +22,9 @@ public class MemoryCandidateRepository implements CandidateRepository {
 
     public MemoryCandidateRepository() {
         LocalDateTime dateTime = LocalDateTime.of(2023, 3, 21, 12, 0);
-        save(new Candidate(0, "Vasia Pupkin", "test", dateTime, 1));
-        save(new Candidate(0, "Lyolik Lipkin", "test", dateTime, 2));
-        save(new Candidate(0, "Bolik Dubkin", "test", dateTime, 3));
+        save(new Candidate(0, "Vasia Pupkin", "test", dateTime, 1, 0));
+        save(new Candidate(0, "Lyolik Lipkin", "test", dateTime, 2, 0));
+        save(new Candidate(0, "Bolik Dubkin", "test", dateTime, 3, 0));
     }
 
     @Override
@@ -43,7 +43,8 @@ public class MemoryCandidateRepository implements CandidateRepository {
     public boolean update(Candidate candidate) {
         return candidates.computeIfPresent(candidate.getId(), (id, oldCandidate) ->
                 new Candidate(oldCandidate.getId(), candidate.getName(), candidate.getDescription(),
-                        candidate.getCreationDate(), candidate.getCityId())) != null;
+                        candidate.getCreationDate(), candidate.getCityId(), candidate.getFileId())
+        ) != null;
     }
 
     @Override

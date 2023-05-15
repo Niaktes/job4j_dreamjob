@@ -2,7 +2,9 @@ package ru.job4j.dreamjob.service;
 
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Service;
+import ru.job4j.dreamjob.dto.FileDto;
 import ru.job4j.dreamjob.model.Candidate;
+import ru.job4j.dreamjob.model.File;
 import ru.job4j.dreamjob.repository.CandidateRepository;
 
 import java.util.Collection;
@@ -13,24 +15,46 @@ import java.util.Optional;
 public class SimpleCandidateService implements CandidateService {
 
     private final CandidateRepository candidateRepository;
+    private final FileService fileService;
 
-    public SimpleCandidateService(CandidateRepository candidateRepository) {
+    public SimpleCandidateService(CandidateRepository candidateRepository, FileService fileService) {
         this.candidateRepository = candidateRepository;
+        this.fileService = fileService;
     }
 
     @Override
-    public Candidate save(Candidate candidate) {
+    public Candidate save(Candidate candidate, FileDto image) {
+        saveNewFile(candidate, image);
         return candidateRepository.save(candidate);
+    }
+
+    private void saveNewFile(Candidate candidate, FileDto image) {
+        File file = fileService.save(image);
+        candidate.setFileId(file.getId());
     }
 
     @Override
     public boolean deleteById(int id) {
-        return candidateRepository.deleteById(id);
+        Optional<Candidate> fileOptional = findById(id);
+        if (fileOptional.isEmpty()) {
+            return false;
+        }
+        boolean isDeleted = candidateRepository.deleteById(id);
+        fileService.deleteById(fileOptional.get().getFileId());
+        return isDeleted;
     }
 
     @Override
-    public boolean update(Candidate candidate) {
-        return candidateRepository.update(candidate);
+    public boolean update(Candidate candidate, FileDto image) {
+        boolean isNewFileEmpty = image.getContent().length == 0;
+        if (isNewFileEmpty) {
+            return candidateRepository.update(candidate);
+        }
+        int oldFileId = candidate.getFileId();
+        saveNewFile(candidate, image);
+        boolean isUpdated = candidateRepository.update(candidate);
+        fileService.deleteById(oldFileId);
+        return isUpdated;
     }
 
     @Override
