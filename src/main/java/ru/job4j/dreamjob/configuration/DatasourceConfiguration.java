@@ -50,10 +50,10 @@ public class DatasourceConfiguration {
 
             @Override
             public Object toDatabaseParam(LocalDateTime value) {
-                return value == null? null : Timestamp.valueOf(value);
+                return value == null ? null : Timestamp.valueOf(value);
             }
         };
-        return new NoQuirks(){
+        return new NoQuirks() {
             {
                 converters.put(LocalDateTime.class, converter);
             }

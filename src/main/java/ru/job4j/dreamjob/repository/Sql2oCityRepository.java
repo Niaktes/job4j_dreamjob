@@ -19,7 +19,7 @@ public class Sql2oCityRepository implements CityRepository {
 
     @Override
     public Collection<City> findAll() {
-        try (Connection connection = sql2o.open()){
+        try (Connection connection = sql2o.open()) {
             Query query = connection.createQuery("SELECT * FROM cities");
             return query.executeAndFetch(City.class);
         }
