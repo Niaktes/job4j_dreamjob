@@ -6,6 +6,7 @@
 target
 *.iml
 *.db
+/files
 
 # Compiled class file
 *.class

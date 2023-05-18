@@ -54,7 +54,7 @@ public class Sql2oVacancyRepository implements VacancyRepository {
             String sql = """
                     UPDATE vacancies
                     SET title = :title, description = :description, creation_date = :creationDate,
-                        visible = :visible, city_id = :cityId, file_id = :fileId;
+                        visible = :visible, city_id = :cityId, file_id = :fileId
                     WHERE id = :id;
                     """;
             Query query = connection.createQuery(sql)
