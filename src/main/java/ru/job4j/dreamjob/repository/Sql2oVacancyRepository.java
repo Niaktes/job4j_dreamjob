@@ -75,7 +75,8 @@ public class Sql2oVacancyRepository implements VacancyRepository {
         try (Connection connection = sql2o.open()) {
             Query query = connection.createQuery("SELECT * FROM vacancies WHERE id = :id");
             query.addParameter("id", id);
-            Vacancy vacancy = query.setColumnMappings(Vacancy.COLUMN_MAPPING).executeAndFetchFirst(Vacancy.class);
+            Vacancy vacancy = query.setColumnMappings(Vacancy.COLUMN_MAPPING)
+                    .executeAndFetchFirst(Vacancy.class);
             return  Optional.ofNullable(vacancy);
         }
     }
