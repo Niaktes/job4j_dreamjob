@@ -44,7 +44,8 @@ class Sql2oUserRepositoryTest {
     @Test
     void whenSaveAndFindThenGetUser() {
         User savedUser = sql2oUserRepository.save(user).get();
-        User findedUser = sql2oUserRepository.findByEmailAndPassword(user.getEmail(), user.getPassword()).get();
+        User findedUser = sql2oUserRepository.findByEmailAndPassword(
+                user.getEmail(), user.getPassword()).get();
         assertThat(savedUser).usingRecursiveComparison().isEqualTo(user);
         assertThat(findedUser).usingRecursiveComparison().isEqualTo(user);
     }
