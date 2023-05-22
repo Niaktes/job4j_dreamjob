@@ -25,7 +25,8 @@
                     <a class="nav-item nav-link" th:href="@{/candidates/create}">Создать резюме</a>
                 </div>
                 <div class="d-flex">
-                    <a class="nav-item text-secondary" th:href="@{/users/register}">Регистрация</a>
+                    <a class="nav-item text-light me-3" th:href="@{/users/register}">Регистрация</a>
+                    <a class="nav-link text-secondary" th:href="@{/users/login}">Войти</a>
                 </div>
             </div>
         </div>
@@ -38,7 +39,7 @@
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label"><b>Почта</b></label>
-                <input type="text" class="form-control" id="email" name="email" placeholder="Sergei@mail.ru" required>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Sergei@mail.ru" required>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label"><b>Пароль</b></label>
