@@ -35,7 +35,7 @@ public class Sql2oUserRepository implements UserRepository {
             user.setId(generatedId);
             return Optional.ofNullable(user);
         } catch (Sql2oException e) {
-            LOG.warn(e.getMessage());
+            LOG.error(e.getMessage(), e);
         }
         return Optional.empty();
     }
