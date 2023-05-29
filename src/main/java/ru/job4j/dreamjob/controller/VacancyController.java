@@ -10,8 +10,6 @@ import ru.job4j.dreamjob.model.Vacancy;
 import ru.job4j.dreamjob.service.CityService;
 import ru.job4j.dreamjob.service.VacancyService;
 
-import java.io.IOException;
-
 @ThreadSafe
 @Controller
 @RequestMapping("/vacancies")
@@ -65,7 +63,7 @@ public class VacancyController {
         try {
             vacancyService.save(vacancy, new FileDto(file.getOriginalFilename(), file.getBytes()));
             return "redirect:/vacancies";
-        } catch (IOException e) {
+        } catch (Exception e) {
             model.addAttribute("message", e.getMessage());
             return "errors/404";
         }
@@ -82,7 +80,7 @@ public class VacancyController {
                 return "errors/404";
             }
             return "redirect:/vacancies";
-        } catch (IOException e) {
+        } catch (Exception e) {
             model.addAttribute("message", e.getMessage());
             return "errors/404";
         }

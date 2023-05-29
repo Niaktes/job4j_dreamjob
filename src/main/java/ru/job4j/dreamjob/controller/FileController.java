@@ -21,7 +21,7 @@ public class FileController {
     public ResponseEntity<?> getById(@PathVariable int id) {
         var contentOptional = fileService.getFileById(id);
         if (contentOptional.isEmpty()) {
-            return  ResponseEntity.notFound().build();
+            return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(contentOptional.get().getContent());
     }

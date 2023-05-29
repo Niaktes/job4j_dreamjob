@@ -48,7 +48,7 @@ public class UserController {
     public String loginUser(@ModelAttribute User user, Model model, HttpServletRequest request) {
         Optional<User> userOptional = userService.findByEmailAndPassword(user.getEmail(), user.getPassword());
         if (userOptional.isEmpty()) {
-            model.addAttribute("error", "Почта или пароль введены неверно!");
+            model.addAttribute("message", "Почта или пароль введены неверно!");
             return "users/login";
         }
         HttpSession session = request.getSession();
